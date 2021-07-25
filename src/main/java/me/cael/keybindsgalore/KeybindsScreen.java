@@ -19,6 +19,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
+import org.lwjgl.opengl.GL11;
 
 //If I had a dollar for every time I had to copy code from a Vazkii mod, I would have 2 dollars. Which isn't a lot, but its weird it happened twice.
 public class KeybindsScreen extends Screen {
@@ -55,9 +56,10 @@ public class KeybindsScreen extends Screen {
         BufferBuilder buf = tess.getBuffer();
 
         RenderSystem.disableCull();
+        RenderSystem.disableTexture();
         RenderSystem.enableBlend();
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
-        buf.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
+        RenderSystem.shadeModel(GL11.GL_SMOOTH);
+        buf.begin(GL11.GL_TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
         for (int seg = 0; seg < segments; seg++) {
             boolean mouseInSector = degPer * seg < angle && angle < degPer * (seg + 1);
             float radius = Math.max(0F, Math.min((timeIn + delta - seg * 6F / segments) * 40F, maxRadius));
@@ -95,7 +97,8 @@ public class KeybindsScreen extends Screen {
             }
         }
         tess.draw();
-
+        RenderSystem.shadeModel(GL11.GL_FLAT);
+        RenderSystem.enableTexture();
         for (int seg = 0; seg < segments; seg++) {
             boolean mouseInSector = degPer * seg < angle && angle < degPer * (seg + 1);
             float radius = Math.max(0F, Math.min((timeIn + delta - seg * 6F / segments) * 40F, maxRadius));
@@ -134,7 +137,7 @@ public class KeybindsScreen extends Screen {
     public void tick() {
         super.tick();
         if (!InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), conflictedKey.getCode())) {
-            mc.setScreen(null);
+            mc.openScreen(null);
             if (slotSelected != -1) {
                 KeyBinding bind = KeybindsManager.getConflicting(conflictedKey).get(slotSelected);
                 ((AccessorKeyBinding) bind).setPressed(true);

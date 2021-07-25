@@ -37,7 +37,7 @@ public class KeybindsManager {
     public static void openConflictMenu(InputUtil.Key key) {
         KeybindsScreen screen = new KeybindsScreen();
         screen.setConflictedKey(key);
-        MinecraftClient.getInstance().setScreen(screen);
+        MinecraftClient.getInstance().openScreen(screen);
     }
 
     public static List<KeyBinding> getConflicting(InputUtil.Key key) {
