@@ -60,7 +60,7 @@ fun getBranch(): String {
 
 repositories {
     maven {
-		name = "Fabric"
+	name = "Fabric"
         url = uri("https://maven.fabricmc.net/")
     }
     mavenLocal()
@@ -134,12 +134,6 @@ curseforge {
 
         mainArtifact(file(releaseFile), closureOf<CurseArtifact> {
             displayName = releaseName
-            relations(closureOf<CurseRelation> {
-                embeddedLibrary("pal")
-                optionalDependency("roughly-enough-items")
-                requiredDependency("fabric-api")
-                requiredDependency("fabric-language-kotlin")
-            })
         })
 
         afterEvaluate {
