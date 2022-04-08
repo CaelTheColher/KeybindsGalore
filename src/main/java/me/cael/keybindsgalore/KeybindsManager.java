@@ -15,7 +15,7 @@ public class KeybindsManager {
 
     public static boolean handleConflict(InputUtil.Key key) {
         List<KeyBinding> matches = new ArrayList<>();
-        KeyBinding[] keysAll = MinecraftClient.getInstance().options.keysAll;
+        KeyBinding[] keysAll = MinecraftClient.getInstance().options.allKeys;
         for (KeyBinding bind: keysAll) {
             if (bind.matchesKey(key.getCode(), -1)) {
                 matches.add(bind);

@@ -18,7 +18,6 @@ plugins {
     id("maven-publish")
     id("fabric-loom")
     id("org.ajoberstar.grgit")
-    id("org.jetbrains.kotlin.jvm")
     id("com.matthewprenger.cursegradle")
     id("com.modrinth.minotaur")
 }
