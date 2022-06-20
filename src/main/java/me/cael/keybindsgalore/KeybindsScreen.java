@@ -16,7 +16,7 @@ import net.minecraft.client.render.*;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.NarratorManager;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
 
@@ -106,8 +106,7 @@ public class KeybindsScreen extends Screen {
             float rad = (seg + 0.5f) * degPer;
             float xp = x + MathHelper.cos(rad) * radius;
             float yp = y + MathHelper.sin(rad) * radius;
-
-            String boundKey = new TranslatableText(KeybindsManager.getConflicting(conflictedKey).get(seg).getTranslationKey()).getString();
+            String boundKey = Text.translatable(KeybindsManager.getConflicting(conflictedKey).get(seg).getTranslationKey()).getString();
             float xsp = xp - 4;
             float ysp = yp;
             String name = (mouseInSector ? Formatting.UNDERLINE : Formatting.RESET) + boundKey;

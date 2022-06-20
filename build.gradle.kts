@@ -59,7 +59,7 @@ fun getBranch(): String {
 
 repositories {
     maven {
-	name = "Fabric"
+	    name = "Fabric"
         url = uri("https://maven.fabricmc.net/")
     }
     mavenLocal()
